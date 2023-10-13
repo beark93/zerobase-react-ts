@@ -22,18 +22,13 @@
     "skipLibCheck": false,
     "baseUrl": "./",
     "paths": {
-      "@components/*": [
-        "src/components/*"
-      ]
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"]
     },
-    "outDir": "./dist",
+    "outDir": "./dist"
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
+  "include": ["src"],
+  "exclude": ["node_modules"],
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   }

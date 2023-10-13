@@ -1,5 +1,4 @@
 import path from 'path';
-import { webpack } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -36,8 +35,7 @@ export default function config(env, argv) {
       ],
     },
     output: {
-      filename: 'bundle.js',
-      path: path.join(__dirname, 'dist'),
+      publicPath: '/',
     },
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
@@ -53,10 +51,6 @@ export default function config(env, argv) {
         template: './public/index.html',
       }),
       new CleanWebpackPlugin(),
-      new webpack.ProvidePlugin({
-        React: 'react',
-        process: 'process/browser.js',
-      }),
     ],
   };
 }
