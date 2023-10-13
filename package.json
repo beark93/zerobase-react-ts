@@ -5,14 +5,22 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
     "dev": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "start": "webpack --mode development",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint-staged": "lint-staged"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "lint-staged": {
+    "*.{ts, tsx}": [
+      "prettier --write ./src",
+      "eslint --fix ./src"
+    ]
+  },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -37,6 +45,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "process": "^0.11.10",
     "style-loader": "^3.3.3",
