@@ -8,3 +8,4 @@
 5. ESLint
 6. Prettier
 7. husky
+8. Material UI

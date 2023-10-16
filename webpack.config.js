@@ -16,6 +16,15 @@ export default function config(env, argv) {
       port: 3000,
       hot: true,
       static: path.join(__dirname, 'dist'),
+      proxy: {
+        '/api': {
+          target: 'https://diablo2.io/dclone_api.php',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/api': '',
+          },
+        },
+      },
     },
     module: {
       rules: [

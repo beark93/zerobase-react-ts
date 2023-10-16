@@ -8,15 +8,13 @@ import {
   Typography,
 } from '@mui/material';
 
-const IconCard = ({
-  title,
-  background,
-  onClick,
-}: {
+type PropsType = {
   title: string;
   background: string;
   onClick?: () => void;
-}) => {
+};
+
+const IconCard = ({ title, background, onClick }: PropsType) => {
   return (
     <Card
       sx={{
