@@ -1,12 +1,16 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from 'react';
 
 import { Grid, Tabs, Tab } from '@mui/material';
 
 import UberSkeleton from '@components/Skeleton/UberSkeleton';
 import LabelProgress from '@components/Progress/LabelProgress';
 import BasicHeader from '@components/Header/BasicHeader';
-import RefreshButton from '@components/Buuton/RefeshButton';
-import { getUberList } from '@api';
 import {
   UberType,
   getUberLabel,
@@ -17,17 +21,12 @@ import {
 
 const defaultList = getDefaultUberList();
 
-const UberList = () => {
+const WebSocketTest = () => {
   const [displayList, setDisplayList] = useState<Array<UberType>>(defaultList);
   const [data, setData] = useState<Array<UberType>>([]);
   const [ladder, setLadder] = useState('1');
   const [isLoading, setIsLoading] = useState(true);
-
-  const callUberApi = () =>
-    getUberList().then((res) => {
-      setData(res.data);
-      setIsLoading(false);
-    });
+  const ws = useRef<WebSocket | null>(null);
 
   const onChangeLadder = useCallback(
     (_: React.SyntheticEvent, newLadder: string) => {
@@ -37,15 +36,41 @@ const UberList = () => {
     []
   );
 
-  const onClickRefesh = useCallback(() => {
-    if (!isLoading) {
-      setIsLoading(true);
-      callUberApi();
+  const disConnect = (mode: number) => {
+    if (ws.current) {
+      if (mode > 0) {
+        ws.current.close();
+      }
+      console.log('disconnect websocket');
+      ws.current = null;
     }
-  }, [isLoading]);
+  };
 
   useEffect(() => {
-    callUberApi();
+    if (!ws.current) {
+      ws.current = new WebSocket('ws://localhost:3333/ws');
+      ws.current.onopen = () => {
+        console.log('connect websocket');
+      };
+      ws.current.onclose = () => {
+        disConnect(0);
+      };
+      ws.current.onerror = (err) => {
+        console.log('error: ', err);
+        disConnect(1);
+      };
+      ws.current.onmessage = (evt: MessageEvent) => {
+        const data: Array<UberType> = JSON.parse(evt.data);
+        setData(data);
+      };
+      setIsLoading(false);
+    }
+
+    return () => {
+      if (ws.current) {
+        disConnect(1);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -68,7 +93,7 @@ const UberList = () => {
 
   return (
     <>
-      <BasicHeader right={<RefreshButton onClick={onClickRefesh} />}>
+      <BasicHeader>
         {useMemo(
           () => (
             <Tabs
@@ -106,4 +131,4 @@ const UberList = () => {
   );
 };
 
-export default UberList;
+export default WebSocketTest;

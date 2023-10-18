@@ -6,7 +6,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 const __dirname = path.resolve();
 const tsConfigPath = path.resolve(__dirname, 'tsconfig.json');
 
-export default function config(env, argv) {
+export default function config(_, argv) {
   return {
     devtool: argv.mode ? 'source-map' : 'cheap-module-source-map',
     mode: argv.mode,

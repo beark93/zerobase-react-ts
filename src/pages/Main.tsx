@@ -21,7 +21,11 @@ const Main = () => {
         background='#00aa00'
         onClick={() => navigate('/uber/list')}
       />
-      <IconCard title='test2' background='#aa0000' />
+      <IconCard
+        title='websocket'
+        background='#aa0000'
+        onClick={() => navigate('/websocket/test')}
+      />
       <IconCard title='test3' background='#0000aa' />
       <IconCard title='test4' background='#aa00aa' />
     </Stack>
