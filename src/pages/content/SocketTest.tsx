@@ -21,7 +21,7 @@ import {
 
 const defaultList = getDefaultUberList();
 
-const WebSocketTest = () => {
+const SocketTest = () => {
   const [displayList, setDisplayList] = useState<Array<UberType>>(defaultList);
   const [data, setData] = useState<Array<UberType>>([]);
   const [ladder, setLadder] = useState('1');
@@ -131,4 +131,4 @@ const WebSocketTest = () => {
   );
 };
 
-export default WebSocketTest;
+export default SocketTest;

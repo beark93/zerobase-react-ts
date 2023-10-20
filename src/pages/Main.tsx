@@ -22,11 +22,15 @@ const Main = () => {
         onClick={() => navigate('/uber/list')}
       />
       <IconCard
-        title='websocket'
+        title='socket'
         background='#aa0000'
-        onClick={() => navigate('/websocket/test')}
+        onClick={() => navigate('/socket/test')}
       />
-      <IconCard title='test3' background='#0000aa' />
+      <IconCard
+        title='card-game'
+        background='#0000aa'
+        onClick={() => navigate('/game/card')}
+      />
       <IconCard title='test4' background='#aa00aa' />
     </Stack>
   );

@@ -27,7 +27,14 @@ const App = () => {
           }}
         >
           <GlobalStyles styles={{ body: { backgroundColor: '#ececec' } }} />
-          <Box sx={{ width: '100%', height: '100%', display: 'inline-block' }}>
+          <Box
+            sx={{
+              width: '100%',
+              height: '100%',
+              display: 'inline-block',
+              minWidth: '480px',
+            }}
+          >
             <Routes />
           </Box>
         </Container>
