@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import GameCard from '@pages/content/GameCard';
+import CardGameProvider from '@components/Provider/CardGameProvider';
 
 const GameRoutes = {
   path: 'game',
@@ -8,7 +9,11 @@ const GameRoutes = {
   children: [
     {
       path: 'card',
-      element: <GameCard />,
+      element: (
+        <CardGameProvider>
+          <GameCard />
+        </CardGameProvider>
+      ),
     },
   ],
 };

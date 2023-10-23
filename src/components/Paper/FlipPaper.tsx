@@ -1,5 +1,12 @@
+import React from 'react';
+
 import { Box, Paper, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+
+import {
+  useCard,
+  useCardGameDispatch,
+} from '@components/Provider/CardGameProvider';
 
 const StyledPaper = styled(Paper)`
   ${({ theme }) => `
@@ -30,12 +37,17 @@ const StyledPaper = styled(Paper)`
 `;
 
 type PropsType = {
-  id: number;
-  flip: boolean;
-  onClick: () => void;
+  index: number;
 };
 
-const FlipPaper = ({ id, flip, onClick }: PropsType) => {
+const FlipPaper = ({ index }: PropsType) => {
+  const { id, flip } = useCard(index);
+  const { onFlip } = useCardGameDispatch();
+
+  const onClick = () => {
+    onFlip(index);
+  };
+
   return (
     <Box
       sx={{
@@ -55,4 +67,4 @@ const FlipPaper = ({ id, flip, onClick }: PropsType) => {
   );
 };
 
-export default FlipPaper;
+export default React.memo(FlipPaper);
