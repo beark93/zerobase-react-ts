@@ -23,6 +23,7 @@ type State = {
 type Timer = {
   viewTimer: number;
   gameTimer: number;
+  takenTime: number;
 };
 
 type StateAction =
@@ -95,7 +96,7 @@ const stateReducer: (state: State, action: StateAction) => State = (
       };
     case 'END':
       return {
-        cards: state.cards.map((it) => ({ id: it.id, flip: false })),
+        cards: state.cards.map((it) => ({ id: it.id, flip: it.flip })),
         count: state.count + 1,
         gameState: 'END',
       };
@@ -119,6 +120,7 @@ const timerReducer: (timer: Timer, action: TimerAction) => Timer = (
       };
     case 'END':
       return {
+        takenTime: GAME_TIME - timer.gameTimer,
         viewTimer: 0,
         gameTimer: 0,
       };
@@ -138,12 +140,13 @@ const CardGameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [timer, timerDispatch] = useReducer(timerReducer, {
     viewTimer: 3,
-    gameTimer: 20,
+    gameTimer: GAME_TIME,
+    takenTime: 0,
   });
 
-  const gameTimerInterval = useRef<NodeJS.Timeout>();
-  const viewTimerInterval = useRef<NodeJS.Timeout>();
-  const cardCheckTimeout = useRef<NodeJS.Timeout>();
+  const gameTimerInterval = useRef<number>();
+  const viewTimerInterval = useRef<number>();
+  const cardCheckTimeout = useRef<number>();
   const preIndex = useRef(-1);
 
   const onGameStart = useCallback(() => {
@@ -239,6 +242,8 @@ const CardGameProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default CardGameProvider;
+
+export const GAME_TIME = 5;
 
 export const useCardGameState = () => {
   const state = useContext(CardGameStateContext);

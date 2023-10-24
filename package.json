@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "prepare": "husky install",
+    "preinstall": "npx only-allow pnpm",
     "dev": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "start": "webpack --mode development",
@@ -24,8 +25,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.13",
-    "@mui/material": "^5.14.13",
+    "@mui/icons-material": "^5.14.14",
+    "@mui/material": "^5.14.14",
     "axios": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -44,8 +44,8 @@ const App = () => {
             height: '100%',
             minHeight: '100vh',
             py: {
-              zero: 6,
-              max: 2,
+              zero: 2,
+              max: 6,
             },
           }}
         >
