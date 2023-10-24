@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import SocketTest from '@pages/content/SocketTest';
 
 const SocketRoutes = {
-  path: 'websocket',
+  path: 'socket',
   element: <Outlet />,
   children: [
     {

@@ -52,8 +52,8 @@ const FlipPaper = ({ index }: PropsType) => {
     <Box
       sx={{
         perspective: '500px',
-        width: { xs: '90px', sm: '100px' },
-        height: { xs: '115px', sm: '130px' },
+        width: { zero: '44px', min: '17.5vw', max: '100px' },
+        height: { zero: '58px', min: '25vw', max: '130px' },
       }}
       onClick={onClick}
     >

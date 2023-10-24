@@ -7,12 +7,24 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import { PaperProps } from '@mui/material/Paper/Paper';
+import { styled } from '@mui/material/styles';
 
 type PropsType = {
   title: string;
   background: string;
   onClick?: () => void;
 };
+
+const IconPaper = styled(Paper)<PaperProps>(({ theme }) => ({
+  width: '100px',
+  height: '100px',
+  [theme.breakpoints.down('max')]: {
+    width: '85px',
+    height: '85px',
+  },
+  mb: 1,
+}));
 
 const IconCard = ({ title, background, onClick }: PropsType) => {
   return (
@@ -23,15 +35,14 @@ const IconCard = ({ title, background, onClick }: PropsType) => {
     >
       <CardActionArea onClick={onClick}>
         <CardContent>
-          <Paper
-            sx={{
-              width: '100px',
-              height: '100px',
-              backgroundColor: background,
-              mb: 1,
+          <IconPaper sx={{ backgroundColor: background }} />
+          <Typography
+            fontSize={{
+              max: '1rem',
             }}
-          />
-          <Typography fontSize={16} color='inherit' textAlign='center'>
+            color='inherit'
+            textAlign='center'
+          >
             {title}
           </Typography>
         </CardContent>

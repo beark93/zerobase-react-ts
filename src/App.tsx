@@ -7,8 +7,30 @@ import {
   responsiveFontSizes,
 } from '@mui/material/styles';
 
-let theme = createTheme();
-theme = responsiveFontSizes(theme);
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: false; // removes the `xs` breakpoint
+    sm: false;
+    md: false;
+    lg: false;
+    xl: false;
+    zero: true; // adds the `mobile` breakpoint
+    min: true;
+    max: true;
+  }
+}
+
+const theme = responsiveFontSizes(
+  createTheme({
+    breakpoints: {
+      values: {
+        zero: 0,
+        min: 250,
+        max: 600,
+      },
+    },
+  })
+);
 
 const App = () => {
   return (
@@ -16,13 +38,14 @@ const App = () => {
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <Container
-          maxWidth='sm'
+          maxWidth='max'
           sx={{
             backgroundColor: '#fff',
-            height: '100vh',
+            height: '100%',
+            minHeight: '100vh',
             py: {
-              xs: 6,
-              sm: 2,
+              zero: 6,
+              max: 2,
             },
           }}
         >
@@ -32,7 +55,7 @@ const App = () => {
               width: '100%',
               height: '100%',
               display: 'inline-block',
-              minWidth: '480px',
+              minWidth: '220px',
             }}
           >
             <Routes />

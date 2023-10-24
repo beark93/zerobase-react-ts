@@ -21,6 +21,17 @@ import {
 
 const defaultList = getDefaultUberList();
 
+const tabStyle = {
+  fontSize: {
+    zero: '0.8rem',
+    max: 'h6.fontSize',
+  },
+  p: {
+    zero: 0.5,
+    max: 2,
+  },
+};
+
 const SocketTest = () => {
   const [displayList, setDisplayList] = useState<Array<UberType>>(defaultList);
   const [data, setData] = useState<Array<UberType>>([]);
@@ -102,12 +113,8 @@ const SocketTest = () => {
               scrollButtons={false}
               onChange={onChangeLadder}
             >
-              <Tab value='1' label='Ladder' sx={{ fontSize: 'h6.fontSize' }} />
-              <Tab
-                value='2'
-                label='Non Ladder'
-                sx={{ fontSize: 'h6.fontSize' }}
-              />
+              <Tab value='1' label='Ladder' sx={tabStyle} />
+              <Tab value='2' label='Non Ladder' sx={tabStyle} />
             </Tabs>
           ),
           [ladder, onChangeLadder]

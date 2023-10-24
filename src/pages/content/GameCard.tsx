@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { Typography, Stack, Button } from '@mui/material';
+import { TypographyProps } from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 
 import BasicHeader from '@components/Header/BasicHeader';
 import MiddleTypography from '@components/Typography/MiddleTypography';
@@ -12,6 +14,13 @@ import {
   useCardGameTimer,
   useCardGameDispatch,
 } from '@components/Provider/CardGameProvider';
+
+const BackDropTypography = styled(Typography)<TypographyProps>(({ theme }) => ({
+  fontSize: theme.typography.h1.fontSize,
+  [theme.breakpoints.down('max')]: {
+    fontSize: '2rem',
+  },
+}));
 
 const GameCard = () => {
   const { cards, gameState } = useCardGameState();
@@ -27,9 +36,18 @@ const GameCard = () => {
   return (
     <>
       <BasicHeader>
-        <MiddleTypography variant='h6' text='Card Game' />
+        <MiddleTypography variant='h6'>Card Game</MiddleTypography>
       </BasicHeader>
-      <Typography align='center' variant='h4' gutterBottom>
+      <Typography
+        align='center'
+        sx={{
+          fontSize: {
+            zero: '1.2rem',
+            max: 'h4.fontSize',
+          },
+        }}
+        gutterBottom
+      >
         {gameTimer.toFixed(2)}
       </Typography>
       <Stack
@@ -39,18 +57,18 @@ const GameCard = () => {
         alignItems='center'
         useFlexGap
         flexWrap='wrap'
-        p={4}
-        spacing={2}
+        p={{ zero: 1, max: 4 }}
+        spacing={{ zero: 1, max: 2 }}
       >
         <FullBackdrop open={!isStart}>
           {gameState === 'INIT' ? (
             <Button onClick={onGameStart} sx={{ color: '#fff' }}>
-              <Typography variant='h1'>시작</Typography>
+              <BackDropTypography>시작</BackDropTypography>
             </Button>
           ) : gameState === 'VIEW' ? (
-            <Typography variant='h1'>{viewTimer}</Typography>
+            <BackDropTypography>{viewTimer}</BackDropTypography>
           ) : gameState === 'END' ? (
-            <Typography variant='h1'>THE END</Typography>
+            <BackDropTypography>THE END</BackDropTypography>
           ) : (
             ''
           )}

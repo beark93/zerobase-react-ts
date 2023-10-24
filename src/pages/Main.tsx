@@ -10,7 +10,7 @@ const Main = () => {
   return (
     <Stack
       spacing={4}
-      direction={{ xs: 'column', sm: 'row' }}
+      direction={{ zero: 'column', max: 'row' }}
       justifyContent='space-between'
       alignItems='center'
       useFlexGap
